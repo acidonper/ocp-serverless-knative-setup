@@ -176,7 +176,7 @@ Regarding functional point of view, the following list includes the main compone
 
 On the other hand, we have __Channel and Subscriptions__ that tend to involve a linear flow of events (a "pipeline" of processing), where it is possible to end up provisioning a new Channel and Subscription for each stage of processing. At each stage, the generated events are broadcast to all the downstream Subscriptions on the Channel, and there's no "smarts" in the event-transport layer.
 
-![Knative Channel and Subscriptions Workflow](./images/eventing-architecture.png)
+![Knative Channel and Subscriptions Workflow](./images/channel-workflow.png)
 
 - __Channel__: Channels are custom resources that define a single event-forwarding and persistence layer. After events have been sent to a channel from an event source or producer, these events can be sent to multiple Knative services or other sinks by using a subscription (Available in OCP are _*InMemoryChannel and KafkaChannel_)
 
