@@ -15,7 +15,7 @@ Knative Serving defines a set of objects (CRDs) described below to define and co
 
 Regarding the components that compose the Knative architecture, the following picture shows them including their interaction workflow:
 
-[Knative Serverless Architecture](./images/serving-architecture.png)
+![Knative Serverless Architecture](./images/serving-architecture.png)
 
 - __Activator__: It is responsible to queue incoming requests (if a Knative Service is scaled-to-zero) and acts as a request buffer to handle traffic bursts.
 - __Autoscaler__: The autoscaler is responsible to scale the Knative Services based on configuration, metrics and incoming requests.
@@ -25,11 +25,11 @@ Regarding the components that compose the Knative architecture, the following pi
 
 Regarding HTTP and HTTPS request, it is important to understand how each request is handle by Knative:
 
-[Knative Serverless Requests Flow](./images/request-flow.png)
+![Knative Serverless Requests Flow](./images/request-flow.png)
 
 Additionally, Openshift Serverless installs a set of components to implement the HTTP Router abstracting customers to this required solution. 
 
-[Openshift Serverless Requests Flow](./images/request-flow-ocp.png)
+![Openshift Serverless Requests Flow](./images/request-flow-ocp.png)
 
 NOTE: In order to be able to troubleshoot ingress connections, it is possible to configure access logs in the Openshift default router applying the configuration included in the file *files/router-access-log-enable.yaml*.
 
