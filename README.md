@@ -2,6 +2,11 @@
 
 OpenShift Serverless provides Kubernetes native building blocks that enable developers to create and deploy serverless, event-driven applications on OpenShift Container Platform. OpenShift Serverless is based on the open source Knative project, which provides portability and consistency for hybrid and multi-cloud environments by enabling an enterprise-grade serverless platform.
 
+## Environment
+
+- Openshift 4.13+
+- serverless-operator.v1.29.0
+
 ## Knative Serving
 
 ### Introduction
