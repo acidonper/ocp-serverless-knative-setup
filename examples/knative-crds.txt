@@ -1,0 +1,15 @@
+certificates.networking.internal.knative.dev       
+clusterdomainclaims.networking.internal.knative.dev
+configurations.serving.knative.dev                 
+domainmappings.serving.knative.dev                 
+images.caching.internal.knative.dev                
+ingresses.networking.internal.knative.dev          
+knativeeventings.operator.knative.dev              
+knativekafkas.operator.serverless.openshift.io     
+knativeservings.operator.knative.dev               
+metrics.autoscaling.internal.knative.dev           
+podautoscalers.autoscaling.internal.knative.dev    
+revisions.serving.knative.dev                      
+routes.serving.knative.dev                         
+serverlessservices.networking.internal.knative.dev 
+services.serving.knative.dev                       

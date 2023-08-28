@@ -1,0 +1,29 @@
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: ks
+  namespace: knative-serving
+spec:
+  high-availability:
+    replicas: 2
+  deployments:
+  - name: net-kourier-controller
+    readinessProbes: 
+      - container: controller
+        timeoutSeconds: 10
+  - name: webhook
+    resources:
+    - container: webhook
+      requests:
+        cpu: 300m
+        memory: 60Mi
+      limits:
+        cpu: 1000m
+        memory: 1000Mi
+    replicas: 3
+    labels:
+      example-label: label
+    annotations:
+      example-annotation: annotation
+    nodeSelector:
+      disktype: hdd
