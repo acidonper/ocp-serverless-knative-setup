@@ -283,7 +283,7 @@ Data,
 ...
 ```
 
-NOTE: Please review [InMemoryChannel](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md) for more information about the message broker solution implemented by default using Knative native solutions
+NOTE: Please review [InMemoryChannel](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md) for more information about the InMemoryChannel backing channel implemented by default using Knative native solutions
 
 ## Links
 
