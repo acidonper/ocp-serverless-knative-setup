@@ -182,6 +182,7 @@ On the other hand, we have __Channel and Subscriptions__ that tend to involve a 
 
 - __Subcription__: After you have created a channel and an event sink, you can create a subscription to enable event delivery
 
+
 ### Setup Knative Eventing
 
 - Install Serverless Operator
@@ -283,7 +284,7 @@ Data,
 ...
 ```
 
-NOTE: Please review [InMemoryChannel](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md) for more information about the InMemoryChannel backing channel implemented by default using Knative native solutions
+NOTE: Please review [InMemoryChannel](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md) for more information about the InMemoryChannel backing channel implemented by default using Knative native solution (Multi-tenant channel-based broker (MTChannelBasedBroker) architecture)
 
 ## Links
 
