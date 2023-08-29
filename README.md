@@ -283,12 +283,15 @@ Data,
 ...
 ```
 
+NOTE: Please review [InMemoryChannel](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md) for more information about the message broker solution implemented by default using Knative native solutions
+
 ## Links
 
 - [Openshift Serverless Performance Tests](https://docs.openshift.com/serverless/1.29/install/preparing-serverless-install.html#about-serverless-scalability-performance)
 - [Configuring Ingress access logging in Openshift Router](https://docs.openshift.com/container-platform/4.13/networking/ingress-operator.html#nw-configure-ingress-access-logging_configuring-ingress)
 - [Openshift Serverless KnativeServing CRD](https://github.com/openshift-knative/serverless-operator/blob/main/olm-catalog/serverless-operator/manifests/operator_v1beta1_knativeserving_crd.yaml)
 - [Openshift Serverless KnativeServing Autoscaling Configuration](https://docs.openshift.com/serverless/1.29/knative-serving/autoscaling/serverless-autoscaling-developer.html)
+- [Multi-tenant channel-based broker (MTChannelBasedBroker) architecture](https://github.com/knative/eventing/tree/main/docs/mt-channel-based-broker)
 
 ## Author
 
