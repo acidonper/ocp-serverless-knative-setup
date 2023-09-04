@@ -1,0 +1,19 @@
+apiVersion: operator.serverless.openshift.io/v1alpha1
+kind: KnativeKafka
+metadata:
+    name: knative-kafka
+    namespace: knative-eventing
+spec:
+    channel:
+        enabled: true 
+        bootstrapServers: my-cluster-kafka-bootstrap.amq-streams.svc.cluster.local:9092 
+    source:
+        enabled: true 
+    broker:
+        enabled: true 
+        defaultConfig:
+            bootstrapServers: my-cluster-kafka-bootstrap.amq-streams.svc.cluster.local:9092 
+            numPartitions: 3 
+            replicationFactor: 3
+    sink:
+        enabled: true 
