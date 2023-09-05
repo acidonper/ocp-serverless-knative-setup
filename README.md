@@ -124,7 +124,7 @@ oc patch ksvc hello-app -n hello-app  -p '{"spec":{"template":{"metadata":{"anno
 
 # launch the test
 URL=$(oc get ksvc -o jsonpath='{.items[0].status.url}' -n hello-app)
-TEST_URL=$URL K6_INSECURE_SKIP_TLS_VERIFY=true k6 run --vus 50 --duration 30s testing/k8-load-test-simple.js
+TEST_URL=$URL K6_INSECURE_SKIP_TLS_VERIFY=true k6 run --vus 100 --duration 30s testing/k8-load-test-simple.js
 ```
 
 - 25 Virtual Users during 30 seconds with a limit of 25 simultaneous requests and scale with 80%, it means as of 20 request per pod (Solved by 2 microservice)
