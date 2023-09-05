@@ -3,6 +3,13 @@ kind: KnativeServing
 metadata:
   name: knative-serving
 spec:
+  workloads:
+  - name: webhook
+    replicas: 1
+  - name: activator
+    replicas: 2
+  high-availability:
+    replicas: 3
   config:
     network:
       internal-encryption: "true"
