@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello-app
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-app-traffic
+  namespace: hello-app
+spec:
+  template:
+    metadata:
+      name: hello-app-traffic-v2
+    spec:
+      containers:
+      - image: quay.io/openshift-knative/helloworld-go
+        env:
+        - name: TARGET
+          value: "Go Sample v2"
+  traffic:
+  - percent: 50
+    revisionName: hello-app-traffic-v1
+    tag: stable
+  - percent: 50
+    revisionName: hello-app-traffic-v2
+    tag: canary
