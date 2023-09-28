@@ -608,7 +608,7 @@ In this section, it is included a procedure to deploy an event-driven architectu
 
 The following components will be deployed following the procedures included in this section:
 
-- A AMQ Streams architecture (*Kafka)
+- An AMQ Streams architecture (*Kafka)
 - A namespace where the scenario will be deployed (Named __event-app__)
 - A pod that implement a __Knative Source__ via Curl generating CloudEvents based on headers
 - An application that will receive these event notifications (In this case, knative application)
@@ -646,7 +646,7 @@ my-cluster-zookeeper-2                       1/1     Running   0          29m
 
 ```
 
-Once the AMW Streams architecture is deployed, it is time to install the Knative Kafka Broker.
+Once the AMQ Streams architecture is deployed, it is time to install the Knative Kafka Broker.
 
 - Install the Knative Eventing for Apache Kafka
 
