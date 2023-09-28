@@ -92,6 +92,9 @@ $ curl $URL -k
 Hello Go Sample v1!
 ```
 
+### Knative Serving Autoscaling System
+https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md
+
 ### Knative autoscaling tests
 
 Once the hello world application is deployed, it is possible to define a set of different configurations in order to control the performance of the application modifying the total request received per replica among other things.
@@ -179,11 +182,12 @@ curl: (6) Could not resolve host: hello-app.hello-app.svc.cluster.local
 
 ```
 
-> NOTE: It is possible to configure Request per Seconds (RPS) policies, additional autoscaling providers, min and max replicas, scale to zero rules, scaling windows, and other strategies, please review autoscaling documentation
+> NOTE: It is possible to configure Request per Seconds (RPS) policies, additional autoscaling providers, min and max replicas, scale to zero rules, scaling windows, and other strategies, please review autoscaling documentation https://knative.dev/docs/serving/autoscaling/autoscaler-types/#example-of-the-default-autoscaling-configmap
 #### Delete the hello-app Knative service
 ```$bash
 oc delete -f files/serverless-hello-app.yaml
 ```
+
 
 ### Knative traffic management tests
 
@@ -455,6 +459,8 @@ TEST_URL=$URL K6_INSECURE_SKIP_TLS_VERIFY=true k6 run --vus 5 --duration 60s tes
 oc delete -f files/serverless-hello-app-rollout.yaml
 ```
 
+### Garbage collection
+https://knative.dev/docs/serving/revisions/revision-admin-config-options/#garbage-collection
 
 
 ## Knative Eventing
