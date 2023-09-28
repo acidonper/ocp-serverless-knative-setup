@@ -1,0 +1,8 @@
+spec:
+  traffic:
+  - percent: 50
+    revisionName: hello-app-traffic-v1
+    tag: stable
+  - percent: 50
+    revisionName: hello-app-traffic-v2
+    tag: canary
