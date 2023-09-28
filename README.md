@@ -185,7 +185,7 @@ curl: (6) Could not resolve host: hello-app.hello-app.svc.cluster.local
 oc delete -f files/serverless-hello-app.yaml
 ```
 
-## Knative traffic management tests
+### Knative traffic management tests
 
 By default, Knative sends 100% traffic to the latest revision by setting `latestRevision: true` in the spec for a Service. To asigned different amount of traffic to the revisions it is highly recommended to add names to de revisions.
 
@@ -213,7 +213,7 @@ spec:
     tag: stable
 ```
 
-### Deploy HelloWorld App
+#### Deploy HelloWorld App
 
 - Deploy a HelloWorld application
 
@@ -363,7 +363,7 @@ Hello Go Sample v2!
 oc delete -f files/serverless-hello-app-traffic.yaml
 ```
 
-## Knative gradual rollout tests
+### Knative gradual rollout tests
 
 By default, Knative sends 100% traffic to the latest revision by setting `latestRevision: true` in the spec for a Service. Knative provides a rollout-duration parameter, which can be used to gradually shift traffic to the latest Revision, preventing requests from being queued or rejected. Affected Configuration targets are rolled out to 1% of traffic first, and then in equal incremental steps for the rest of the assigned traffic.
 
@@ -387,7 +387,7 @@ spec:
           value: "Go Sample v1"
 ```
 
-### Deploy HelloWorld App
+#### Deploy HelloWorld App
 
 - Deploy a HelloWorld application
 
