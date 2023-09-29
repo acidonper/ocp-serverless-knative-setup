@@ -42,6 +42,22 @@ It is also keep in mind the following information about load balancing:
 
 - Activator pods are scaled horizontally, so there may be multiple Activators in a deployment.
 
+
+### Knative Serving objects
+  
+
+Knative Serving defines a set of objects as Kubernetes Custom Resource Definitions (CRDs). These resources are used to define and control how your serverless workload behaves on the cluster.
+
+![Knative Serving Objects](./images/knative-serving.png)
+
+- __Services__: The service.serving.knative.dev resource automatically manages the whole lifecycle of your workload. It controls the creation of other objects to ensure that your app has a route, a configuration, and a new revision for each update of the service. Service can be defined to always route traffic to the latest revision or to a pinned revision.
+
+- __Routes__: The route.serving.knative.dev resource maps a network endpoint to one or more revisions. You can manage the traffic in several ways, including fractional traffic and named routes.
+
+- __Configurations__: The configuration.serving.knative.dev resource maintains the desired state for your deployment. It provides a clean separation between code and configuration and follows the Twelve-Factor App methodology. Modifying a configuration creates a new revision.
+
+- __Revisions__: The revision.serving.knative.dev resource is a point-in-time snapshot of the code and configuration for each modification made to the workload. Revisions are immutable objects and can be retained for as long as useful. Knative Serving Revisions can be automatically scaled up and down according to incoming traffic.
+
 ### Setup Knative Serving
 
 - Install Serverless Operator
