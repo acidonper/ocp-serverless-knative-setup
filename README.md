@@ -42,6 +42,14 @@ It is also keep in mind the following information about load balancing:
 
 - Activator pods are scaled horizontally, so there may be multiple Activators in a deployment.
 
+
+### Knative Serving objects
+  
+
+Knative Serving defines a set of objects as Kubernetes Custom Resource Definitions (CRDs). These resources are used to define and control how your serverless workload behaves on the cluster.
+
+![Knative Serving Objects](./images/knative-serving.png)
+
 ### Setup Knative Serving
 
 - Install Serverless Operator
