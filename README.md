@@ -475,6 +475,18 @@ Result: 1
 ...
 ```
 
+### Deploy an APP (*Kafka Broker Secured)
+
+[link](./docs/knative-kafka-broker-sec.md)
+
+### Deploy a Kafka Sink (Abstract Kafka event subscriptors)
+
+[link](./docs/kafka-sink.md)
+
+### Deploy a Kafka Source (Abstract Kafka event publishers)
+
+[link](./docs/kafka-source.md)
+
 ## Links
 
 - [Openshift Serverless Performance Tests](https://docs.openshift.com/serverless/1.29/install/preparing-serverless-install.html#about-serverless-scalability-performance)
