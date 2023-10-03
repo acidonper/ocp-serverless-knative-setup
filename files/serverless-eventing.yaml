@@ -3,3 +3,14 @@ kind: KnativeEventing
 metadata:
     name: knative-eventing
     namespace: knative-eventing
+spec:
+  config: 
+    config-br-defaults: 
+      default-br-config: |
+        namespaceDefaults: 
+          broker-kafka-default:
+            brokerClass: Kafka
+            apiVersion: v1
+            kind: ConfigMap
+            name: kafka-broker-config 
+            namespace: knative-eventing 

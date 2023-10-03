@@ -749,6 +749,100 @@ Data,
 ...
 ```
 
+## Deploy an APP (*Kafka Broker) using a specific configuration
+
+We will continue with the previous section, but this time we will use a specific configuration for a namespace.
+This specific configuration was defined in the `KnativeEventing` object for the namespace `broker-kafka-default`:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+    name: knative-eventing
+    namespace: knative-eventing
+spec:
+  config: 
+    config-br-defaults: 
+      default-br-config: |
+        namespaceDefaults: 
+          broker-kafka-default:
+            brokerClass: Kafka
+            apiVersion: v1
+            kind: ConfigMap
+            name: kafka-broker-config 
+            namespace: knative-eventing 
+```
+
+- Check configuration by default for kafka brokers
+oc get cm kafka-broker-config -n knative-eventing
+NAME                  DATA   AGE
+kafka-broker-config   3      8m42s
+```
+
+- Create the respective Knative Broker via Kafka that has less configuration
+
+```$bash
+oc apply -f files/kafka-broker-default/serverless-eventing-kafka-broker.yaml
+```
+
+- Check Kafka Broker topics created in the AMQ Streams solution
+
+```$bash
+oc get kafkatopic -n amq-streams  | grep broker-kafka-default
+...
+knative-broker-broker-kafka-default-broker-kafkap
+...
+```
+
+- Create the trigger and the respective kafka service that receives the events
+
+```$bash
+oc apply -f files/kafka-broker-default/serverless-eventing-kafka-app.yaml
+```
+
+- Create a test app to generate cloud events
+
+```$bash
+oc apply -f files/serverless-eventing-kafka-source.yaml
+```
+
+- Generate a cloud event manually via broker ingress
+
+```$bash
+POD=$(oc get pods --no-headers -n kafka-broker-app | awk '{ print $1 }' | grep kafka-broker-app-test)
+oc -n kafka-broker-app  exec -it $POD bash
+
+bash-4.4$ curl -v "http://kafka-broker-ingress.knative-eventing.svc.cluster.local/broker-kafka-default/broker-kafka" \
+  -X POST \
+  -H "Ce-Id: say-hello" \
+  -H "Ce-Specversion: 1.0" \
+  -H "Ce-Type: event-display" \
+  -H "Ce-Source: curl-pod" \
+  -H "Content-Type: application/json" \
+  -d '{"msg":"Hello Knative Eventing from test pod!"}'
+```
+
+- Verify example application logs (*kafka service that receives the events)
+
+```$bash
+oc logs $(oc get pod -o name -n broker-kafka-default | grep event-display) -c user-container -n broker-kafka-default
+...
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: event-display
+  source: curl-pod
+  id: say-hello
+  datacontenttype: application/json
+Data,
+  {
+    "msg": "Hello Knative Eventing from test pod!"
+  }
+...
+```
+
+
 #### Troubleshooting in AMQ Streams
 
 The following procedures are useful in order to troubleshoot problems in AMQ Streams with topics and messages.
@@ -781,6 +875,7 @@ Result: 1
 - [Openshift Serverless KnativeServing Autoscaling Configuration](https://docs.openshift.com/serverless/1.29/knative-serving/autoscaling/serverless-autoscaling-developer.html)
 - [Multi-tenant channel-based broker (MTChannelBasedBroker) architecture](https://github.com/knative/eventing/tree/main/docs/mt-channel-based-broker)
 - [Openshift Serverless KnativeEventing Kafka Broker Installation](https://docs.openshift.com/serverless/1.29/install/installing-knative-eventing.html#serverless-install-kafka-odc_installing-knative-eventing)
+- [Configure Broker defaults](https://knative.dev/docs/eventing/configuration/broker-configuration/)
 
 ## Author
 
