@@ -2,7 +2,7 @@
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: event-display-trigger
+  name: event-display-trigger2
   namespace: kafka-broker-app
   annotations:
      kafka.eventing.knative.dev/delivery.order: ordered
@@ -10,17 +10,17 @@ spec:
   broker: kafka-broker-app
   filter:
     attributes:
-      type: event-display
+      type: event-display-2
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
       kind: Service
-      name: event-display
+      name: event-display-2
 ---
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: event-display
+  name: event-display-2
   namespace: kafka-broker-app
 spec:
   template:

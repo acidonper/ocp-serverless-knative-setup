@@ -1,0 +1,16 @@
+apiVersion: sources.knative.dev/v1beta1
+kind: KafkaSource
+metadata:
+  namespace: kafkasource-kafka-broker-app
+  name: kafkasource-kafka-broker-app
+spec:
+  consumers: 5
+  bootstrapServers:
+  - my-cluster-kafka-bootstrap.amq-streams.svc.cluster.local:9092
+  topics:
+  - knative-kafka-source
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display

@@ -293,11 +293,12 @@ In this section, it is included a procedure to deploy an event-driven architectu
 The following components will be deployed following the procedures included in this section:
 
 - A AMQ Streams architecture (*Kafka)
-- A namespace where the scenario will be deployed (Named __event-app__)
+- A namespace where the scenario will be deployed (Named __kafka-broker-app__)
 - A pod that implement a __Knative Source__ via Curl generating CloudEvents based on headers
-- An application that will receive these event notifications (In this case, knative application)
-- A __Knative Broker__ that receive events from the *Knative Source* and deliver them to the respective *Knative Trigger* based on Kafka
-- A __Knative Trigger__ that redirect the CloudEvents to the application deployed
+- A knative application that will receive event notifications (type -> event-display)
+- A knative application that will receive event notifications (type -> event-display-2)
+- A __Knative Broker__ that receives events from the *Knative Source* and deliver them to the respective *Knative Triggers* based on Kafka
+- A set of __Knative Triggers__ that redirect the CloudEvents to the respective application deployed
 
 > NOTE: It is important to keep in mind that Knative Serving has to be deployed in order to deploy this use case
 
@@ -380,6 +381,7 @@ knative-broker-kafka-broker-app-kafka-broker-app
 
 ```$bash
 oc apply -f files/serverless-eventing-kafka-app.yaml
+oc apply -f files/serverless-eventing-kafka-app-2.yaml
 ```
 
 - Create a test app to generate cloud events
@@ -401,13 +403,22 @@ bash-4.4$ curl -v "http://kafka-broker-ingress.knative-eventing.svc.cluster.loca
   -H "Ce-Type: event-display" \
   -H "Ce-Source: curl-pod" \
   -H "Content-Type: application/json" \
-  -d '{"msg":"Hello Knative Eventing from test pod!"}'
+  -d '{"msg":"Hello Knative Eventing from test pod - TRIGGER 1!"}'
+
+bash-4.4$ curl -v "http://kafka-broker-ingress.knative-eventing.svc.cluster.local/kafka-broker-app/kafka-broker-app" \
+  -X POST \
+  -H "Ce-Id: say-hello" \
+  -H "Ce-Specversion: 1.0" \
+  -H "Ce-type: event-display-2" \
+  -H "Ce-Source: curl-pod" \
+  -H "Content-Type: application/json" \
+  -d '{"msg":"Hello Knative Eventing from test pod - TRIGGER 2!"}'
 ```
 
 - Verify example application logs (*kafka service that receives the events)
 
 ```$bash
-oc logs $(oc get pod -o name -n kafka-broker-app | grep event-display) -c user-container -n kafka-broker-app
+oc logs $(oc get pod -o name -n kafka-broker-app | grep event-display | grep -v event-display-2) -c user-container -n kafka-broker-app
 ...
 ☁️  cloudevents.Event
 Validation: valid
@@ -419,7 +430,23 @@ Context Attributes,
   datacontenttype: application/json
 Data,
   {
-    "msg": "Hello Knative Eventing from test pod!"
+    "msg": "Hello Knative Eventing from test pod - TRIGGER 1!"
+  }
+...
+
+oc logs $(oc get pod -o name -n kafka-broker-app | grep event-display-2) -c user-container -n kafka-broker-app
+...
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: event-display-2
+  source: curl-pod
+  id: say-hello
+  datacontenttype: application/json
+Data,
+  {
+    "msg": "Hello Knative Eventing from test pod - TRIGGER 2!"
   }
 ...
 ```
