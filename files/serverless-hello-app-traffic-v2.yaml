@@ -20,9 +20,9 @@ spec:
         - name: TARGET
           value: "Go Sample v2"
   traffic:
-  - percent: 50
+  - percent: 100
     revisionName: hello-app-traffic-v1
     tag: stable
-  - percent: 50
+  - percent: 0
     revisionName: hello-app-traffic-v2
     tag: canary

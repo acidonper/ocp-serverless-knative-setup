@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: broker-kafka-default
+---
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: broker-kafka
+  namespace: broker-kafka-default

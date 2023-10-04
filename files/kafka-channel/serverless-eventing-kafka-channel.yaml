@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kafka-channel-app
+---
+apiVersion: messaging.knative.dev/v1beta1
+kind: KafkaChannel
+metadata:
+  name: kafka-channel
+  namespace: kafka-channel-app
+spec:
+  numPartitions: 3
+  replicationFactor: 3
+
+---
