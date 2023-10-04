@@ -32,7 +32,7 @@ oc apply -f files/kafkasource/serverless-eventing-kafkasource-ns.yaml
 oc apply -f files/kafkasource/amq-kafkatopic.yaml
 ```
 
-- Create the respective kafka service that receives the events
+- Create the respective knative service that receives the events
 
 ```$bash
 oc apply -f files/kafkasource/serverless-eventing-kafka-app.yaml

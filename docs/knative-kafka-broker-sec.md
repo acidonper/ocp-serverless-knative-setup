@@ -103,7 +103,7 @@ amq-streams   knative-broker-kafka-broker-sec-kafka-broker-sec                  
 ...
 ```
 
-- Create the trigger and the respective kafka service that receives the events
+- Create the trigger and the respective knative service that receives the events
 
 ```$bash
 oc apply -f files/kafka-sec/serverless-eventing-kafka-app.yaml
