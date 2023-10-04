@@ -1,0 +1,32 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
+  name: kafka-sec-user
+  namespace: amq-streams
+  labels:
+    strimzi.io/cluster: kafka-sec
+spec:
+  authentication:
+    type: scram-sha-512
+    password:
+      valueFrom:
+        secretKeyRef:
+          name: kafka-sec-user
+          key: password
+  authorization:
+    type: simple
+    acls:
+      - resource:
+          type: topic
+          name: "knative-broker-"
+          patternType: prefix
+        operations: 
+          - "All"
+        host: "*"
+      - resource:
+          type: group
+          name: "*"
+          patternType: literal
+        operations: 
+          - "All"
+        host: "*"

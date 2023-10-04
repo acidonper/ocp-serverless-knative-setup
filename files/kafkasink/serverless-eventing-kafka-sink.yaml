@@ -1,0 +1,9 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: KafkaSink
+metadata:
+   name: my-kafka-sink
+   namespace: kafkasink-kafka-broker-app
+spec:
+   topic: knative-kafka-sink
+   bootstrapServers:
+      - my-cluster-kafka-bootstrap.amq-streams.svc.cluster.local:9092
