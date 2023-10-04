@@ -173,11 +173,11 @@ oc get pods -n knative-eventing
 - [Configure Broker defaults](https://knative.dev/docs/eventing/configuration/broker-configuration/)
 
 
-#### Troubleshooting in AMQ Streams
+## Troubleshooting in AMQ Streams
 
 The following procedures are useful in order to troubleshoot problems in AMQ Streams with topics and messages.
 
-##### Generate an event manually
+### Generate an event manually
 
 ```$bash
 oc -n amq-streams  exec -it my-cluster-kafka-0 -- bin/kafka-console-producer.sh --topic knative-broker-kafka-broker-app-kafka-broker-app --bootstrap-server my-cluster-kafka-bootstrap:9092
@@ -188,12 +188,26 @@ Hello kafka-broker-app
 
 > NOTE: It is required to exit the producer console with "crtl + c"
 
-##### Show number of events in a topic manually (*Optional)
+### Show number of events in a topic manually (*Optional)
 
 ```$bash
 oc -n amq-streams  exec -it my-cluster-kafka-0 -- bin/kafka-run-class.sh kafka.tools.GetOffsetShell --topic knative-broker-kafka-broker-app-kafka-broker-app --broker-list my-cluster-kafka-bootstrap:9092 | awk -F  ":" '{sum += $3} END {print "Result: "sum}'
 ...
 Result: 1
+...
+```
+
+### Show topics via AMQ Streams Operator
+
+```$bash
+oc get kafkatopics -n amq-streams
+...
+```
+
+### Show users via AMQ Streams Operator
+
+```$bash
+oc get kafkausers -n amq-streams
 ...
 ```
 
