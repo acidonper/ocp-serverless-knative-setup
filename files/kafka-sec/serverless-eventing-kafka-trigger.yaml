@@ -1,0 +1,18 @@
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: event-display-trigger-sec
+  namespace: kafka-broker-sec
+  annotations:
+     kafka.eventing.knative.dev/delivery.order: ordered
+spec:
+  broker: kafka-broker-sec
+  filter:
+    attributes:
+      type: event-display
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
