@@ -11,6 +11,7 @@ The following components will be deployed following the procedures included in t
 - A __Knative Channel__ that receive events from the *Knative Source* and deliver them to the respective *Knative Subscription* based on Kafka
 - A __Knative Subscription__ that redirect the CloudEvents to the application deployed
 
+> NOTE: It is important to keep in mind that create a route for a channel needs special configuration in the ingress.
 > NOTE: It is important to keep in mind that Knative Serving has to be deployed in order to deploy this use case
 
 Once it is clear the components that will be deployed, it is time to start executing the next procedure:
