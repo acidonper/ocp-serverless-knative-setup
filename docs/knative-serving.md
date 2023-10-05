@@ -128,7 +128,7 @@ oc delete -f files/serverless-hello-app.yaml
 
 ## Knative traffic management tests
 
-By default, Knative sends 100% traffic to the latest revision by setting `latestRevision: true` in the spec for a Service. To asigned different amount of traffic to the revisions it is highly recommended to add names to de revisions.
+By default, Knative sends 100% traffic to the latest revision by setting `latestRevision: true` in the spec for a Service. To assigned different amount of traffic to the revisions it is highly recommended to add names to de revisions.
 
 - This yaml file will create a new Knative service with the revision name `hello-app-traffic-v1`. We have also added the `tag: stable` to this revision. When a tag attribute is applied to a Route, an address for the specific traffic target is created.
   
@@ -183,7 +183,7 @@ $ echo $URL
 $ curl $URL -k
 Hello Go Sample v1!
 
-# Check stagin HTTP service
+# Check stable HTTP service
 $ URL_STABLE=$(oc get ksvc -o jsonpath='{.items[0].status.traffic[0].url}' -n hello-app)
 $ echo $URL_STABLE
 $ curl $URL_STABLE -k
