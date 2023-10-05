@@ -396,7 +396,7 @@ TEST_URL=$URL K6_INSECURE_SKIP_TLS_VERIFY=true k6 run --vus 5 --duration 60s tes
 oc delete -f files/serverless-hello-app-rollout.yaml
 ```
 
-## Cluster local availability
+## Cluster local availability (privete services)
 
 By default, Knative services are published to a public IP address. 
 
@@ -406,10 +406,61 @@ By default, Knative services are published to a public IP address.
 oc label ksvc <service_name> networking.knative.dev/visibility=cluster-local
 ```
 
+- Default configuration can be changes to create Knative service private by default. Anfortunaly currently there is an issue in the Serverless Operator and this is not supported.
+  Issue: https://issues.redhat.com/browse/SRVKS-1154
+  GitHub pull request: https://github.com/openshift-knative/serverless-operator/pull/2305
+
+- When this issue is fixed, we  have to change the configmap config-domain.
+  
+```$bash
+oc get cm config-domain -n knative-serving -o=yaml
+```
+
+- Change it to:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  config:
+    domain:
+      svc.cluster.local: ''    
+      mycluster.sandbox577.opentlc.com: |
+        selector:
+          expose: route-public
+```
+
+
+- Deploy a HelloWorld application
+
+```$bash
+oc apply -f files/serverless-hello-app-public.yaml
+```
+
 Here you can read the [documentation](https://master--knative.netlify.app/development/serving/cluster-local-route/).
 
-TODO hacer esto en el objeto knative-serving 
-- Set all the Knative services private. In the namespace `knative-serving` delete the domain configmap `config-domain`. This will make all the knative service private. Here you can read the [documentation](https://master--knative.netlify.app/development/serving/using-a-custom-domain/)
-
 ## Garbage collection
+
+We are going to change the garbage collection configuration to only retein 1 non active revision.
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-gc
+  namespace: knative-serving
+data:
+  retain-since-create-time: "disabled"
+  retain-since-last-active-time: "disabled"
+  max-non-active-revisions: "1"
+  min-non-active-revisions: "0"
+```
+
+```$bash
+oc apply -f files/sserverless-serving-config-gc.yaml
+```
+
 Here you can read the [documentation](https://knative.dev/docs/serving/revisions/revision-admin-config-options/#garbage-collection)

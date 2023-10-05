@@ -49,7 +49,6 @@ oc apply -f files/kafka-channel/serverless-eventing-kafka-create-msg.yaml
 
 - Generate a cloud event manually via channel ingress
 
-TODO
 ```$bash
 POD=$(oc get pods --no-headers -n kafka-channel-app | awk '{ print $1 }' | grep kafka-channel-app-test)
 oc -n kafka-channel-app  exec -it $POD bash
