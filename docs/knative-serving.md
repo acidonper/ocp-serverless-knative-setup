@@ -406,7 +406,7 @@ By default, Knative services are published to a public IP address.
 oc label ksvc <service_name> networking.knative.dev/visibility=cluster-local
 ```
 
-- Default configuration can be changes to create Knative service private by default. Anfortunaly currently there is an issue in the Serverless Operator and this is not supported.
+- Default configuration can be changes to create Knative service private by default. Unfortunately currently there is an issue in the Serverless Operator and this is not supported.
   Issue: https://issues.redhat.com/browse/SRVKS-1154
   GitHub pull request: https://github.com/openshift-knative/serverless-operator/pull/2305
 
@@ -444,7 +444,7 @@ Here you can read the [documentation](https://master--knative.netlify.app/develo
 
 ## Garbage collection
 
-We are going to change the garbage collection configuration to only retein 1 non active revision.
+We are going to change the garbage collection configuration to only retain 1 non active revision.
 
 ```yaml
 apiVersion: v1
