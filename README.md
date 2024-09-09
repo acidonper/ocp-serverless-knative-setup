@@ -211,6 +211,13 @@ oc get kafkausers -n amq-streams
 ...
 ```
 
+### Show groups via AMQ Streams Operator
+
+```$bash
+oc -n amq-streams  exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-consumer-groups.sh --bootstrap-server :9092 --list
+...
+```
+
 ## Author
 
 Asier Cidon @RedHat
