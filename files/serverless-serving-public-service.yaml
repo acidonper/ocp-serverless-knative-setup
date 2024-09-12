@@ -1,0 +1,14 @@
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  config:
+    domain:
+      svc.cluster.local: ''    
+      mycluster.sandbox577.opentlc.com: |
+        selector:
+          expose: route-public
+
+
